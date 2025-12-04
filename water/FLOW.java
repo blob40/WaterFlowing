@@ -20,6 +20,7 @@ public class FLOW {
 			{200, 98, 200, 200, 200, 200, 200, 200, 200, 76}		
 		};
 		canFlowOff(FirstMap, 1, 1);
+		System.out.println("nuggets");
 			
 	 	int[][] TestMap = {
 			{100, 200, 200, 200, 200, 200, 200, 200, 200, 200}, 
@@ -34,6 +35,7 @@ public class FLOW {
 			{200, 98, 6, 200, 200, 200, 200, 200, 200, 200}
 		};
 		canFlowOff(TestMap, 4, 5);
+		System.out.println("chiceeeeeeeeeek");
 		
 
 		int[][] smallMap = {
@@ -42,6 +44,7 @@ public class FLOW {
 			{100, 100, 300}
 		};
 		canFlowOff(smallMap, 1, 1);
+		System.out.println("chick");
 }
 
  // Recursive method to determine if water can flow off the map
@@ -51,25 +54,20 @@ public class FLOW {
 		
 
 		if (row < 0 || row >= map.length || col < 0 || col >= map[0].length){
-			System.out.println("false");
 			return false;
 		}
 		
 	 	if(row == 0 || row == map.length-1 || col == 0 || col == map[0].length-1){
-			System.out.println("true");
 			return true;
 		} else {
-		   if (map[row][col] > map[row][col-1]){
-				return canFlowOff (map, row, col-1);
-		   } else if(map[row][col] > map[row+1][col]){
-			   return canFlowOff (map, row+1, col);
-		   } else if(map[row][col] > map[row-1][col]){
-			   return canFlowOff (map, row-1, col); 
-		   } else if(map[row][col] > map[row][col+1]){
-			   return canFlowOff (map, row, col+1);
-		   }
+		   boolean left = map[row][col] > map[row][col-1] && canFlowOff (map, row, col-1);
+		   boolean up = map[row][col] > map[row+1][col] && canFlowOff (map, row+1, col);
+		   boolean down = map[row][col] > map[row-1][col] && canFlowOff (map, row-1, col); 
+		   boolean right = map[row][col] > map[row][col+1] && canFlowOff (map, row, col+1);
+		    if(left || up || down || right){
+			   return true;
 		}
-		System.out.println("false");
+		   }
 		return false;
 	}
 }
